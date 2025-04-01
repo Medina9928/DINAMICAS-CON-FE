@@ -1,10 +1,10 @@
 const numberButtons = document.querySelectorAll('.number-button');
-let selectedNumbers = []; // Array para almacenar los números seleccionados
-let adminMode = false; // Variable para el modo administrador
-let soldNumbers = JSON.parse(localStorage.getItem('soldNumbers')) || []; // Cargar números vendidos desde localStorage
+let selectedNumbers = []; // Cambiar a un array para almacenar múltiples números
+let adminMode = false;
+let soldNumbers = JSON.parse(localStorage.getItem('soldNumbers')) || [];
 
 // Conectar al servidor WebSocket
-const socket = new WebSocket('wss://dinamicas-con-fe-production.up.railway.app/');
+const socket = new WebSocket('https://dinamicas-con-fe-production.up.railway.app/'); // Cambia esto a tu URL de producción
 
 // Marcar los números vendidos al cargar la página
 function updateNumberStates() {
@@ -22,15 +22,11 @@ updateNumberStates();
 
 // Cargar números vendidos desde el servidor al inicio
 async function loadSoldNumbers() {
-    try {
-        const response = await fetch('/numbers'); // Asegúrate de que esta ruta sea correcta
-        const numbers = await response.json();
-        soldNumbers = numbers.filter(num => num.selected).map(num => num.number);
-        localStorage.setItem('soldNumbers', JSON.stringify(soldNumbers)); // Guardar en localStorage
-        updateNumberStates();
-    } catch (error) {
-        console.error('Error al cargar los números vendidos:', error);
-    }
+    const response = await fetch('/numbers');
+    const numbers = await response.json();
+    soldNumbers = numbers.filter(num => num.selected).map(num => num.number);
+    localStorage.setItem('soldNumbers', JSON.stringify(soldNumbers)); // Guardar en localStorage
+    updateNumberStates();
 }
 loadSoldNumbers(); // Cargar números vendidos al inicio
 
@@ -130,32 +126,37 @@ socket.onopen = () => {
 
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    if (data.selected) {
-        // Si el número fue vendido
-        soldNumbers.push(data.number);
-    } else {
-        // Si el número fue habilitado
-        const index = soldNumbers.indexOf(data.number);
-        if (index !== -1) {
-            soldNumbers.splice(index, 1);
+    const { number, selected } = data;
+
+    // Actualiza la UI según el número y su estado
+    if (selected) {
+        // Marcar el número como vendido
+        const button = document.querySelector(`.number-button[value="${number}"]`);
+        if (button) {
+            button.classList.add('sold');
+            button.disabled = true; // Deshabilitar el botón
         }
+        // Agregar el número a la lista de vendidos
+        if (!soldNumbers.includes(number)) {
+            soldNumbers.push(number);
+            localStorage.setItem('soldNumbers', JSON.stringify(soldNumbers)); // Actualizar localStorage
+            updateNumberStates(); // Actualizar la UI
+        }
+    } else {
+        // Habilitar el número
+        const button = document.querySelector(`.number-button[value="${number}"]`);
+        if (button) {
+            button.classList.remove('sold');
+            button.disabled = false; // Habilitar el botón
+        }
+        // Eliminar el número de la lista de vendidos
+        soldNumbers = soldNumbers.filter(num => num !== number);
+        localStorage.setItem('soldNumbers', JSON.stringify(soldNumbers)); // Actualizar localStorage
+        updateNumberStates(); // Actualizar la UI
     }
-    localStorage.setItem('soldNumbers', JSON.stringify(soldNumbers)); // Actualizar localStorage
-    updateNumberStates(); // Actualizar la UI
 };
 
-// Manejar errores de WebSocket
-socket.onerror = (error) => {
-    console.error('WebSocket Error:', error);
-};
-
-// Manejar cierre de WebSocket
-socket.onclose = () => {
-    console.log('Conexión WebSocket cerrada');
-};
-
-// Función para enviar un mensaje por WhatsApp (debes implementar esta función)
 function sendWhatsAppMessage(message) {
-    // Implementa la lógica para enviar un mensaje por WhatsApp
-    console.log('Mensaje enviado por WhatsApp:', message);
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=573024990764&text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
 }
