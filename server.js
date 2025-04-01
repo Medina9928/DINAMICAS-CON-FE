@@ -9,23 +9,23 @@ const WS_PORT = 5001;
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname))); // Sirve archivos estáticos (HTML, CSS, JS)
 
 // Data file path
-const DATA_FILE = 'numbers.json';
+const DATA_FILE = path.join(__dirname, 'data', 'numbers.json');
 
-// Initialize data file if it doesn't exist
+// Inicializa el archivo de datos si no existe
 if (!fs.existsSync(DATA_FILE)) {
     fs.writeFileSync(DATA_FILE, JSON.stringify([]));
 }
 
-// API endpoint to get numbers
+// API endpoint para obtener números
 app.get('/api/numbers', (req, res) => {
     const data = JSON.parse(fs.readFileSync(DATA_FILE));
     res.json(data);
 });
 
-// API endpoint to update numbers
+// API endpoint para actualizar números
 app.post('/api/numbers', (req, res) => {
     const { number, selected } = req.body;
     let data = JSON.parse(fs.readFileSync(DATA_FILE));
@@ -49,20 +49,20 @@ app.post('/api/numbers', (req, res) => {
     });
 });
 
-// Start HTTP server
+// Iniciar el servidor HTTP
 const server = app.listen(PORT, () => {
-    console.log(`HTTP Server running on port ${PORT}`);
+    console.log(`Servidor HTTP corriendo en el puerto ${PORT}`);
 });
 
-// WebSocket Server
+// Servidor WebSocket
 const wss = new WebSocket.Server({ port: WS_PORT });
 
 wss.on('connection', (ws) => {
-    console.log('New WebSocket client connected');
+    console.log('Nuevo cliente WebSocket conectado');
     
     ws.on('close', () => {
-        console.log('Client disconnected');
+        console.log('Cliente desconectado');
     });
 });
 
-console.log(`WebSocket Server running on port ${WS_PORT}`);
+console.log(`Servidor WebSocket corriendo en el puerto ${WS_PORT}`);
