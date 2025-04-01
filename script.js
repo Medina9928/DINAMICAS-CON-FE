@@ -4,7 +4,7 @@ let adminMode = false;
 let soldNumbers = JSON.parse(localStorage.getItem('soldNumbers')) || [];
 
 // Conectar al servidor WebSocket
-const socket = new WebSocket('https://dinamicas-con-fe-production.up.railway.app/'); // Cambia esto a tu URL de producción
+const socket = new WebSocket('ws://localhost:5000'); // Cambia esto a tu URL de producción
 
 // Marcar los números vendidos al cargar la página
 function updateNumberStates() {
