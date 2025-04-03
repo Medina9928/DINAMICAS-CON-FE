@@ -25,8 +25,8 @@ header h1 {
 }
 
 .prize-image {
-    width: 100%; /* Ocupa el ancho disponible */
-    max-width: 600px; /* Tamaño máximo en pantallas grandes */
+    width: 100%; /* Ocupa el ancho disponible del contenedor */
+    max-width: 90%; /* Limita al 90% del ancho del contenedor */
     height: auto; /* Mantiene la proporción */
     margin: 20px auto; /* Centrado horizontal y margen superior */
     border: 5px solid white;
@@ -165,10 +165,6 @@ footer a:hover {
     header h1 {
         font-size: 3em;
     }
-    .prize-image {
-        max-width: 400px; /* Reducido para tablets */
-        margin: 15px auto; /* Margen más pequeño */
-    }
     .header-info h2 {
         font-size: 2.5em;
     }
@@ -200,10 +196,6 @@ footer a:hover {
     header h1 {
         font-size: 2em;
     }
-    .prize-image {
-        max-width: 80%; /* Usa porcentaje para mayor flexibilidad */
-        margin: 10px auto; /* Margen reducido */
-    }
     .header-info h2 {
         font-size: 1.8em;
     }
@@ -225,12 +217,5 @@ footer a:hover {
     .pay-button {
         padding: 6px 12px;
         font-size: 0.9em;
-    }
-}
-
-/* Para pantallas muy pequeñas */
-@media (max-width: 360px) {
-    .prize-image {
-        max-width: 90%; /* Ligeramente más grande en proporción */
     }
 }
