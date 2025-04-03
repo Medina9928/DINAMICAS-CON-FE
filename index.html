@@ -21,7 +21,8 @@
 
         <section class="number-section">
             <h2>Seleccione un Número</h2>
-            <p>Números Vendidos: <span id="soldCount">0</span>/99</p>
+            <!-- Contador manual editable -->
+            <p>Números Vendidos: <span id="soldCountStatic">0</span>/100 <input type="number" id="manualCount" min="0" max="100" style="display: none;" value="90"></p>
             <form id="raffleForm">
                 <table>
                     <tbody>
@@ -147,16 +148,13 @@
                         </tr>
                     </tbody>
                 </table>
-                <div id="soldNumbersList">
-                    <h3>Lista de Números Vendidos</h3>
-                    <ul id="soldNumbersUl"></ul>
-                </div>
+                <!-- Quité la lista de números vendidos -->
             </form>
         </section>
 
         <div class="button-container">
             <button id="payButton" class="pay-button">Pagar</button>
-            <button id="adminMode" class="pay-button" style="display: none;">Desactivar Modo Admin</button>
+            <button id="adminMode" class="pay-button" style="display: none;">Activar Modo Admin</button>
         </div>
     </main>
 
