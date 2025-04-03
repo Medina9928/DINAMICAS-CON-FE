@@ -1,12 +1,11 @@
-export const config = { runtime: 'edge' };
+import { kv } from "@vercel/kv";
 
-// Importar el archivo JSON directamente
-import numerosVendidos from '../numeros-vendidos.json';
-
-export default async function handler(request) {
-  // Devolver los números vendidos como respuesta
-  return new Response(JSON.stringify({ vendidos: numerosVendidos.vendidos }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+export default async function handler(req, res) {
+    try {
+        const soldNumbers = (await kv.get("soldNumbers")) || [];
+        res.status(200).json(soldNumbers);
+    } catch (error) {
+        console.error("Error fetching numbers:", error);
+        res.status(500).json({ error: "Error fetching numbers" });
+    }
 }
