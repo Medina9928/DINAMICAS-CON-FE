@@ -1,6 +1,6 @@
 /* Estilo general */
 body {
-    font-family: 'Montserrat', sans-serif; /* Cambiaste a Montserrat */
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f0f4f8; /* Fondo azul claro */
@@ -13,22 +13,27 @@ header {
     padding: 30px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Asegura que no exceda la pantalla */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+    overflow: hidden; /* Evita desbordamiento del contenido */
 }
 
 header h1 {
     color: white;
     margin: 0;
-    font-size: 5em; /* Título grande */
+    font-size: 5em;
 }
 
 .prize-image {
-    width: 100%;
-    max-width: 600px; /* Aumentado para destacar el premio */
+    width: 100%; /* Ocupa el ancho disponible */
+    max-width: 600px; /* Tamaño máximo en pantallas grandes */
     height: auto;
     margin-top: 20px;
     border: 5px solid white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box; /* Incluye borde en el tamaño */
+    display: block; /* Evita problemas de alineación */
 }
 
 /* Sección de información */
@@ -42,17 +47,17 @@ header h1 {
 }
 
 .header-info h2 {
-    color: #08118bc4; /* Azul con transparencia */
-    font-size: 3.5em; /* Título grande */
+    color: #08118bc4;
+    font-size: 3.5em;
 }
 
 .header-info p {
-    font-size: 2em; /* Texto grande */
+    font-size: 2em;
     margin: 10px 0;
 }
 
 .header-info strong {
-    color: #0b2c99bd; /* Azul con transparencia */
+    color: #0b2c99bd;
 }
 
 /* Sección de números */
@@ -62,7 +67,7 @@ header h1 {
 }
 
 .number-section h2 {
-    color: #e7e8e9; /* Gris claro */
+    color: #e7e8e9;
     font-size: 1.5em;
 }
 
@@ -90,7 +95,7 @@ header h1 {
     height: 50px;
     margin: 5px;
     font-size: 1.1em;
-    background-color: #2389f0; /* Azul claro */
+    background-color: #2389f0;
     color: white;
     border: none;
     border-radius: 5px;
@@ -99,7 +104,7 @@ header h1 {
 }
 
 .number-button:hover {
-    background-color: #094677; /* Azul más oscuro */
+    background-color: #094677;
 }
 
 .number-button.sold {
@@ -108,7 +113,7 @@ header h1 {
 }
 
 .number-button.selected {
-    background-color: #cc2e06; /* Rojo */
+    background-color: #cc2e06;
 }
 
 /* Contenedor de botones */
@@ -120,7 +125,7 @@ header h1 {
 .pay-button {
     padding: 10px 20px;
     font-size: 1.2em;
-    background-color: #0351a0; /* Azul oscuro */
+    background-color: #0351a0;
     color: white;
     border: none;
     border-radius: 5px;
@@ -129,22 +134,23 @@ header h1 {
 }
 
 .pay-button:hover {
-    background-color: #4682b4; /* Azul medio */
+    background-color: #4682b4;
 }
 
 /* Pie de página */
 footer {
-    background-color: #032b68d7; /* Azul oscuro con transparencia */
+    background-color: #032b68d7;
     color: white;
     text-align: center;
     padding: 20px;
     position: relative;
     bottom: 0;
     width: 100%;
+    box-sizing: border-box; /* Incluye padding */
 }
 
 footer a {
-    color: #289906; /* Verde */
+    color: #289906;
     text-decoration: none;
     font-weight: bold;
 }
@@ -154,78 +160,75 @@ footer a:hover {
 }
 
 /* Media Queries para pantallas pequeñas */
-@media (max-width: 768px) { /* Corregido de 200px a 768px */
+@media (max-width: 768px) {
     header h1 {
-        font-size: 3em; /* Reducido */
+        font-size: 3em;
     }
-
     .prize-image {
-        max-width: 400px; /* Proporcional para tablets */
+        max-width: 400px; /* Reducido para tablets */
     }
-
     .header-info h2 {
         font-size: 2.5em;
     }
-
     .header-info p {
         font-size: 1.5em;
     }
-
     .number-section h2 {
         font-size: 1.4em;
     }
-
     .number-section p {
         font-size: 1em;
     }
-
     .number-button {
         width: 40px;
         height: 40px;
-        font-size: 0.9em; /* Reducido */
+        font-size: 0.9em;
         margin: 3px;
     }
-
     .pay-button {
         padding: 8px 16px;
-        font-size: 1em; /* Reducido */
+        font-size: 1em;
     }
 }
 
 @media (max-width: 480px) {
+    header {
+        padding: 20px; /* Reducimos padding para ahorrar espacio */
+    }
     header h1 {
         font-size: 2em;
     }
-
     .prize-image {
-        max-width: 300px; /* Proporcional para móviles */
+        max-width: 250px; /* Más pequeño para móviles */
+        margin: 10px auto; /* Centrado y menos margen superior */
     }
-
     .header-info h2 {
         font-size: 1.8em;
     }
-
     .header-info p {
         font-size: 1.2em;
     }
-
     .number-section h2 {
         font-size: 1.2em;
     }
-
     .number-section p {
         font-size: 0.9em;
     }
-
     .number-button {
         width: 30px;
         height: 30px;
-        font-size: 0.8em; /* Corregido de 3em a 0.8em */
+        font-size: 0.8em;
         margin: 2px;
     }
-
     .pay-button {
         padding: 6px 12px;
-        font-size: 0.9em; /* Corregido de 3em a 0.9em */
+        font-size: 0.9em;
+    }
+}
+
+/* Para pantallas muy pequeñas (opcional) */
+@media (max-width: 360px) {
+    .prize-image {
+        max-width: 200px; /* Aún más pequeño para pantallas estrechas */
     }
 }
