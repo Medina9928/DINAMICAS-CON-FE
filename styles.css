@@ -27,13 +27,14 @@ header h1 {
 .prize-image {
     width: 100%; /* Ocupa el ancho disponible */
     max-width: 600px; /* Tamaño máximo en pantallas grandes */
-    height: auto;
-    margin-top: 20px;
+    height: auto; /* Mantiene la proporción */
+    margin: 20px auto; /* Centrado horizontal y margen superior */
     border: 5px solid white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     box-sizing: border-box; /* Incluye borde en el tamaño */
     display: block; /* Evita problemas de alineación */
+    object-fit: contain; /* Asegura que la imagen no se distorsione */
 }
 
 /* Sección de información */
@@ -166,6 +167,7 @@ footer a:hover {
     }
     .prize-image {
         max-width: 400px; /* Reducido para tablets */
+        margin: 15px auto; /* Margen más pequeño */
     }
     .header-info h2 {
         font-size: 2.5em;
@@ -199,8 +201,8 @@ footer a:hover {
         font-size: 2em;
     }
     .prize-image {
-        max-width: 250px; /* Más pequeño para móviles */
-        margin: 10px auto; /* Centrado y menos margen superior */
+        max-width: 80%; /* Usa porcentaje para mayor flexibilidad */
+        margin: 10px auto; /* Margen reducido */
     }
     .header-info h2 {
         font-size: 1.8em;
@@ -226,9 +228,9 @@ footer a:hover {
     }
 }
 
-/* Para pantallas muy pequeñas (opcional) */
+/* Para pantallas muy pequeñas */
 @media (max-width: 360px) {
     .prize-image {
-        max-width: 200px; /* Aún más pequeño para pantallas estrechas */
+        max-width: 90%; /* Ligeramente más grande en proporción */
     }
 }
