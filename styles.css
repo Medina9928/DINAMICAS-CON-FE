@@ -23,7 +23,7 @@ header h1 {
 
 .prize-image {
     width: 100%;
-    max-width: 300px; /* Imagen grande en pantallas grandes */
+    max-width: 150px; /* Imagen grande en pantallas grandes */
     height: auto;
     margin-top: 20px;
     border: 5px solid white;
@@ -62,7 +62,7 @@ header h1 {
 }
 
 .number-section h2 {
-    color: #1e90ff;
+    color: #e7e8e9;
     font-size: 1.5em;
 }
 
@@ -90,7 +90,7 @@ header h1 {
     height: 50px;
     margin: 5px;
     font-size: 1.1em;
-    background-color: #1e90ff;
+    background-color: #2389f0;
     color: white;
     border: none;
     border-radius: 5px;
@@ -154,13 +154,13 @@ footer a:hover {
 }
 
 /* Media Queries para pantallas pequeñas */
-@media (max-width: 768px) {
+@media (max-width: 200px) {
     header h1 {
         font-size: 2em; /* Reduce el tamaño del título */
     }
 
     .prize-image {
-        max-width: 400px; /* Imagen más pequeña en tablets */
+        max-width: 200px; /* Imagen más pequeña en tablets */
     }
 
     .header-info h2 {
