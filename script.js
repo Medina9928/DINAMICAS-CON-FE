@@ -1,9 +1,12 @@
+// === SECCIÓN DE NÚMEROS VENDIDOS INICIALES (EDITA AQUÍ) ===
+const initialSoldNumbers = ["01", "03", "05", "91", "10"]; // Cambia estos números manualmente
+// === FIN DE LA SECCIÓN ===
+
 const numberButtons = document.querySelectorAll(".number-button");
 let selectedNumbers = [];
 let adminMode = false;
-let soldNumbers = [];
+let soldNumbers = [...initialSoldNumbers]; // Inicializamos con los números manuales
 const adminPassword = "rifa2025"; // Cambia esta contraseña si quieres
-const ws = new WebSocket(`ws://${window.location.host}`); // WebSocket connection
 
 // Actualizar el estado de los botones
 function updateNumberStates() {
@@ -22,16 +25,23 @@ function updateNumberStates() {
     displaySoldNumbers();
 }
 
-// Conexión WebSocket
-ws.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    if (data.soldNumbers) {
-        soldNumbers = data.soldNumbers;
+// Cargar números vendidos desde la API (simulación con lista inicial)
+async function loadSoldNumbers() {
+    try {
+        const response = await fetch("/api/get-numbers");
+        if (!response.ok) throw new Error("Error al cargar números");
+        const data = await response.json();
+        soldNumbers = data.numbers || initialSoldNumbers; // Si la API falla, usa la lista manual
+        updateNumberStates();
+    } catch (error) {
+        console.error("No se pudo cargar los números vendidos:", error);
+        soldNumbers = [...initialSoldNumbers]; // Fallback a la lista manual
         updateNumberStates();
     }
-};
+}
+loadSoldNumbers();
 
-// Guardar números vendidos en la API
+// Guardar números vendidos en la API (simulación, no persiste en Vercel)
 async function saveSoldNumbers() {
     try {
         const response = await fetch("/api/update-numbers", {
@@ -54,7 +64,8 @@ numberButtons.forEach((button) => {
             if (soldNumbers.includes(number)) {
                 soldNumbers = soldNumbers.filter((num) => num !== number);
                 await saveSoldNumbers();
-                ws.send(JSON.stringify({ soldNumbers })); // Enviar datos actualizados por WebSocket
+                button.classList.remove("sold");
+                button.disabled = false;
                 updateNumberStates();
                 alert(`Número ${number} habilitado nuevamente.`);
             }
@@ -84,7 +95,6 @@ document.getElementById("payButton").addEventListener("click", async () => {
                 }
             });
             await saveSoldNumbers();
-            ws.send(JSON.stringify({ soldNumbers })); // Enviar datos actualizados por WebSocket
             updateNumberStates();
             sendWhatsAppMessage(message);
             selectedNumbers = [];
@@ -94,62 +104,4 @@ document.getElementById("payButton").addEventListener("click", async () => {
     }
 });
 
-// Activar modo administrador con Ctrl+Shift+Y y contraseña
-document.addEventListener("keydown", (event) => {
-    if (event.ctrlKey && event.shiftKey && event.key === "Y") {
-        if (!adminMode) {
-            const password = prompt("Ingresa la contraseña de administrador:");
-            if (password === adminPassword) {
-                adminMode = true;
-                document.getElementById("adminMode").style.display = "block";
-                updateNumberStates(); // Actualizar para permitir clics en números vendidos
-                alert("Modo administrador activado. Haz clic en un número vendido o usa 'Eliminar' en la lista.");
-            } else {
-                alert("Contraseña incorrecta.");
-            }
-        }
-    }
-});
-
-// Desactivar modo administrador con el botón
-document.getElementById("adminMode").addEventListener("click", () => {
-    if (adminMode) {
-        adminMode = false;
-        document.getElementById("adminMode").style.display = "none";
-        alert("Modo administrador desactivado.");
-        selectedNumbers = [];
-        updateNumberStates();
-    }
-});
-
-// Mostrar lista de números vendidos
-function displaySoldNumbers() {
-    const soldNumbersUl = document.getElementById("soldNumbersUl");
-    const soldCount = document.getElementById("soldCount");
-    soldNumbersUl.innerHTML = "";
-    soldCount.textContent = soldNumbers.length;
-
-    soldNumbers.forEach((number) => {
-        const li = document.createElement("li");
-        li.textContent = number;
-        if (adminMode) {
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Eliminar";
-            removeButton.onclick = async () => {
-                soldNumbers = soldNumbers.filter((num) => num !== number);
-                await saveSoldNumbers();
-                ws.send(JSON.stringify({ soldNumbers })); // Enviar datos actualizados por WebSocket
-                updateNumberStates();
-                alert(`Número ${number} habilitado nuevamente.`);
-            };
-            li.appendChild(removeButton);
-        }
-        soldNumbersUl.appendChild(li);
-    });
-}
-
-// Enviar mensaje por WhatsApp
-function sendWhatsAppMessage(message) {
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=573024990764&text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
-}
+// Activar modo administrador con Ctrl
