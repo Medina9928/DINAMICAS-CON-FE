@@ -1,142 +1,231 @@
+/* Estilo general */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Montserrat, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f0f4f8; /* Fondo azul claro */
     color: #333;
 }
 
+/* Encabezado */
 header {
-    background-color: #2c3e50;
-    color: white;
+    background-color: #06529e; /* Azul brillante */
+    padding: 30px;
     text-align: center;
-    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
+    color: white;
     margin: 0;
-    font-size: 2.5em;
+    font-size: 5em;
 }
 
-.logo {
-    max-width: 150px;
-    margin-top: 10px;
-}
-
-main {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
+.prize-image {
+    width: 100%;
+    max-width: 300px; /* Imagen grande en pantallas grandes */
+    height: auto;
+    margin-top: 20px;
+    border: 5px solid white;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Sección de información */
 .header-info {
     text-align: center;
-    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #e6f0fa; /* Azul muy claro */
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 8px;
 }
 
 .header-info h2 {
-    color: #e74c3c;
-    font-size: 1.8em;
+    color: #08118bc4;
+    font-size: 3.5em;
 }
 
+.header-info p {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+.header-info strong {
+    color: #0b2c99bd;
+}
+
+/* Sección de números */
 .number-section {
     text-align: center;
+    padding: 20px;
 }
 
-table {
+.number-section h2 {
+    color: #1e90ff;
+    font-size: 1.5em;
+}
+
+.number-section p {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Envoltorio para la tabla con desplazamiento horizontal en pantallas pequeñas */
+.table-wrapper {
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    max-width: 100%;
     margin: 20px auto;
+}
+
+.number-section table {
     border-collapse: collapse;
+    width: auto; /* La tabla se ajusta al contenido */
+    margin: 0 auto;
 }
 
 .number-button {
     width: 50px;
     height: 50px;
     margin: 5px;
-    font-size: 1.2em;
-    background-color: #3498db;
+    font-size: 1.1em;
+    background-color: #1e90ff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .number-button:hover {
-    background-color: #2980b9;
+    background-color: #094677;
 }
 
 .number-button.sold {
-    background-color: #e74c3c;
+    background-color: #666;
     cursor: not-allowed;
 }
 
 .number-button.selected {
-    background-color: #f1c40f;
-    color: #333;
+    background-color: #cc2e06;
 }
 
-#soldNumbersList {
-    margin-top: 20px;
-}
-
-#soldNumbersUl li {
-    margin: 5px 0;
-    display: flex;
-    align-items: center;
-}
-
-#soldNumbersUl li button {
-    margin-left: 10px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 2px 8px;
-    cursor: pointer;
-    border-radius: 3px;
-}
-
+/* Contenedor de botones */
 .button-container {
     text-align: center;
     margin: 20px 0;
 }
 
 .pay-button {
-    background-color: #27ae60;
-    color: white;
-    padding: 15px 30px;
+    padding: 10px 20px;
     font-size: 1.2em;
+    background-color: #0351a0;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .pay-button:hover {
-    background-color: #219653;
+    background-color: #4682b4;
 }
 
-#adminMode {
-    background-color: #e74c3c;
-}
-
-#adminMode:hover {
-    background-color: #c0392b;
-}
-
+/* Pie de página */
 footer {
+    background-color: #032b68d7;
+    color: white;
     text-align: center;
     padding: 20px;
-    background-color: #2c3e50;
-    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
-.whatsapp-link {
-    color: #27ae60;
+footer a {
+    color: #289906;
     text-decoration: none;
     font-weight: bold;
 }
 
-.whatsapp-link:hover {
+footer a:hover {
     text-decoration: underline;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em; /* Reduce el tamaño del título */
+    }
+
+    .prize-image {
+        max-width: 400px; /* Imagen más pequeña en tablets */
+    }
+
+    .header-info h2 {
+        font-size: 1.5em;
+    }
+
+    .header-info p {
+        font-size: 1em;
+    }
+
+    .number-section h2 {
+        font-size: 1.4em;
+    }
+
+    .number-section p {
+        font-size: 1em;
+    }
+
+    .number-button {
+        width: 40px; /* Botones más pequeños */
+        height: 40px;
+        font-size: 0.9em;
+        margin: 3px;
+    }
+
+    .pay-button {
+        padding: 8px 16px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .prize-image {
+        max-width: 300px; /* Imagen aún más pequeña en móviles */
+    }
+
+    .header-info h2 {
+        font-size: 1.2em;
+    }
+
+    .header-info p {
+        font-size: 0.9em;
+    }
+
+    .number-section h2 {
+        font-size: 1.2em;
+    }
+
+    .number-section p {
+        font-size: 0.9em;
+    }
+
+    .number-button {
+        width: 30px; /* Botones muy pequeños para móviles */
+        height: 30px;
+        font-size: 3em;
+        margin: 2px;
+    }
+
+    .pay-button {
+        padding: 6px 12px;
+        font-size: 3em;
+    }
 }
