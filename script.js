@@ -22,7 +22,7 @@ function updateNumberStates() {
             }
         }
     });
-    displaySoldNumbers();
+    // Quité la llamada a displaySoldNumbers porque ya no hay lista
 }
 
 // Cargar números vendidos desde la API (simulación con lista inicial)
@@ -104,4 +104,41 @@ document.getElementById("payButton").addEventListener("click", async () => {
     }
 });
 
-// Activar modo administrador con Ctrl
+// Enviar mensaje a WhatsApp
+function sendWhatsAppMessage(message) {
+    const url = `https://api.whatsapp.com/send?phone=573024990764&text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+}
+
+// Control del modo admin y contador manual
+const adminModeBtn = document.getElementById("adminMode");
+const manualCountInput = document.getElementById("manualCount");
+const soldCountStatic = document.getElementById("soldCountStatic");
+
+adminModeBtn.addEventListener("click", () => {
+    if (!adminMode) {
+        const password = prompt("Ingresa la contraseña de administrador:");
+        if (password === adminPassword) {
+            adminMode = true;
+            adminModeBtn.textContent = "Guardar y Desactivar Modo Admin";
+            adminModeBtn.style.display = "inline";
+            manualCountInput.style.display = "inline";
+            updateNumberStates();
+        } else {
+            alert("Contraseña incorrecta.");
+        }
+    } else {
+        adminMode = false;
+        manualCountInput.style.display = "none";
+        soldCountStatic.textContent = manualCountInput.value;
+        adminModeBtn.textContent = "Activar Modo Admin";
+        updateNumberStates();
+    }
+});
+
+// Mostrar botón de admin al presionar Ctrl + A
+document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && event.key === "a") {
+        adminModeBtn.style.display = "inline";
+    }
+});
