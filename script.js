@@ -4,6 +4,9 @@ let adminMode = false;
 let soldNumbers = [];
 const adminPassword = "rifa2025"; // Cambia esta contraseña si quieres
 
+// URL de la configuración Edge
+const EDGE_CONFIG_URL = 'https://edge-config.vercel.com/ecfg_9fhzpvxahkkajukuqgxaxqlfxdmo?token=334aa3f6-336c-468c-bf08-004ffd3f8b35';
+
 // Actualizar el estado de los botones
 function updateNumberStates() {
     numberButtons.forEach((button) => {
@@ -21,10 +24,10 @@ function updateNumberStates() {
     displaySoldNumbers();
 }
 
-// Cargar números vendidos desde la API
+// Cargar números vendidos desde Vercel Edge Config
 async function loadSoldNumbers() {
     try {
-        const response = await fetch("/api/get-numbers");
+        const response = await fetch(EDGE_CONFIG_URL);
         if (!response.ok) throw new Error("Error al cargar números");
         soldNumbers = await response.json();
         updateNumberStates();
