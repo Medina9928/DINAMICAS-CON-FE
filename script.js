@@ -3,6 +3,7 @@ let selectedNumbers = [];
 let adminMode = false;
 let soldNumbers = [];
 const adminPassword = "rifa2025"; // Cambia esta contraseña si quieres
+const ws = new WebSocket(`ws://${window.location.host}`); // WebSocket connection
 
 // Actualizar el estado de los botones
 function updateNumberStates() {
@@ -21,20 +22,14 @@ function updateNumberStates() {
     displaySoldNumbers();
 }
 
-// Cargar números vendidos desde la API
-async function loadSoldNumbers() {
-    try {
-        const response = await fetch("/api/get-numbers");
-        if (!response.ok) throw new Error("Error al cargar números");
-        soldNumbers = await response.json();
-        updateNumberStates();
-    } catch (error) {
-        console.error("No se pudo cargar los números vendidos:", error);
-        soldNumbers = [];
+// Conexión WebSocket
+ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    if (data.soldNumbers) {
+        soldNumbers = data.soldNumbers;
         updateNumberStates();
     }
-}
-loadSoldNumbers();
+};
 
 // Guardar números vendidos en la API
 async function saveSoldNumbers() {
@@ -59,8 +54,7 @@ numberButtons.forEach((button) => {
             if (soldNumbers.includes(number)) {
                 soldNumbers = soldNumbers.filter((num) => num !== number);
                 await saveSoldNumbers();
-                button.classList.remove("sold");
-                button.disabled = false;
+                ws.send(JSON.stringify({ soldNumbers })); // Enviar datos actualizados por WebSocket
                 updateNumberStates();
                 alert(`Número ${number} habilitado nuevamente.`);
             }
@@ -90,6 +84,7 @@ document.getElementById("payButton").addEventListener("click", async () => {
                 }
             });
             await saveSoldNumbers();
+            ws.send(JSON.stringify({ soldNumbers })); // Enviar datos actualizados por WebSocket
             updateNumberStates();
             sendWhatsAppMessage(message);
             selectedNumbers = [];
@@ -143,6 +138,7 @@ function displaySoldNumbers() {
             removeButton.onclick = async () => {
                 soldNumbers = soldNumbers.filter((num) => num !== number);
                 await saveSoldNumbers();
+                ws.send(JSON.stringify({ soldNumbers })); // Enviar datos actualizados por WebSocket
                 updateNumberStates();
                 alert(`Número ${number} habilitado nuevamente.`);
             };
