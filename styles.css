@@ -75,29 +75,23 @@ header img {
     padding: 20px;
 }
 
-.number-section h2 {
-    color: #e7e8e9;
-    font-size: 1.5em;
-}
-
-.number-section p {
-    font-size: 1.2em;
-    margin: 10px 0;
-    color: #333;
-}
-
 /* Envoltorio para la tabla */
 .table-wrapper {
     overflow-x: auto; /* Permite desplazamiento horizontal */
     max-width: 100%; /* Asegura que no exceda el ancho de la pantalla */
     margin: 20px auto; /* Centrado */
     padding: 0 10px; /* Espaciado lateral */
+    text-align: center; /* Centra el contenido dentro del contenedor */
 }
 
 .number-section table {
     border-collapse: collapse;
-    width: auto;
-    margin: 0 auto;
+    width: auto; /* Cambia a auto para que la tabla se ajuste a su contenido */
+    margin: 0 auto; /* Centra la tabla dentro del contenedor */
+}
+
+.number-section td {
+    text-align: center; /* Centra el contenido de las celdas */
 }
 
 .number-button {
@@ -140,7 +134,7 @@ header img {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s
 }
 
 .pay-button:hover {
