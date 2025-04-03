@@ -18,13 +18,4 @@ async function obtenerNumerosVendidos() {
   }
 }
 
-// Ejemplo de uso
-obtenerNumerosVendidos().then(numeros => {
-  if (numeros) {
-    console.log('Números vendidos:', numeros);
-  } else {
-    console.log('No se pudieron obtener los números vendidos.');
-  }
-});
-
 module.exports = obtenerNumerosVendidos;
