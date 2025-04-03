@@ -10,158 +10,6 @@ body {
 /* Encabezado */
 header {
     background-color: #06529e; /* Azul más oscuro */
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    width: 100%; /* Asegura que no exceda la pantalla */
-    box-sizing: border-box; /* Incluye padding en el ancho */
-    overflow: hidden; /* Evita desbordamiento del contenido */
-}
-
-header h1 {
-    color: white;
-    margin: 0;
-    font-size: 5em;
-}
-
-.prize-image {
-    width: 100%; /* Ocupa el ancho disponible del contenedor */
-    max-width: 90%; /* Limita al 90% del ancho del contenedor */
-    height: auto; /* Mantiene la proporción */
-    margin: 20px auto; /* Centrado horizontal y margen superior */
-    border: 5px solid white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box; /* Incluye borde en el tamaño */
-    display: block; /* Evita problemas de alineación */
-    object-fit: contain; /* Asegura que la imagen no se distorsione */
-}
-
-/* Sección de información */
-.header-info {
-    text-align: center;
-    padding: 20px;
-    background-color: #e6f0fa;
-    margin: 20px auto;
-    max-width: 800px;
-    border-radius: 8px;
-}
-
-.header-info h2 {
-    color: #08118bc4;
-    font-size: 3.5em;
-}
-
-.header-info p {
-    font-size: 2em;
-    margin: 10px 0;
-}
-
-.header-info strong {
-    color: #0b2c99bd;
-}
-
-/* Sección de números */
-.number-section {
-    text-align: center;
-    padding: 20px;
-}
-
-.number-section h2 {
-    color: #e7e8e9;
-    font-size: 1.5em;
-}
-
-.number-section p {
-    font-size: 1.2em;
-    margin: 10px 0;
-    color: #333;
-}
-
-/* Envoltorio para la tabla */
-.table-wrapper {
-    overflow-x: auto;
-    max-width: 100%;
-    margin: 20px auto;
-}
-
-.number-section table {
-    border-collapse: collapse;
-    width: auto;
-    margin: 0 auto;
-}
-
-.number-button {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
-    font-size: 1.1em;
-    background-color: #2389f0;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.number-button:hover {
-    background-color: #094677;
-}
-
-.number-button.sold {
-    background-color: #666;
-    cursor: not-allowed;
-}
-
-.number-button.selected {
-    background-color: #cc2e06;
-}
-
-/* Contenedor de botones */
-.button-container {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.pay-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background-color: #0351a0;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.pay-button:hover {
-    background-color: #4682b4;
-}
-
-/* Pie de página */
-footer {
-    background-color: #032b68d7;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    box-sizing: border-box; /* Incluye padding */
-}
-
-/* Estilo general */
-body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f4f8; /* Fondo azul claro */
-    color: #333;
-}
-
-/* Encabezado */
-header {
-    background-color: #06529e; /* Azul más oscuro */
     padding: 20px; /* Reducido para un mejor ajuste */
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -178,7 +26,7 @@ header h1 {
 
 /* Ajuste de la imagen del logo */
 header img {
-    max-width: 600px; /* Tamaño máximo de la imagen */
+    max-width: 200px; /* Tamaño máximo de la imagen aumentado */
     height: auto; /* Mantiene la proporción */
     margin: 10px 0; /* Espaciado superior e inferior */
 }
@@ -186,7 +34,7 @@ header img {
 /* Estilo de la imagen del premio */
 .prize-image {
     width: 100%; /* Ocupa el ancho disponible del contenedor */
-    max-width: 90%; /* Limita al 90% del ancho del contenedor */
+    max-width: 100%; /* Limita al 100% del ancho del contenedor */
     height: auto; /* Mantiene la proporción */
     margin: 20px auto; /* Centrado horizontal y margen superior */
     border: 5px solid white;
@@ -240,9 +88,10 @@ header img {
 
 /* Envoltorio para la tabla */
 .table-wrapper {
-    overflow-x: auto;
-    max-width: 100%;
-    margin: 20px auto;
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    max-width: 100%; /* Asegura que no exceda el ancho de la pantalla */
+    margin: 20px auto; /* Centrado */
+    padding: 0 10px; /* Espaciado lateral */
 }
 
 .number-section table {
@@ -295,14 +144,4 @@ header img {
 }
 
 .pay-button:hover {
-    background-color: #4682b4;
-}
-
-/* Pie de página */
-footer {
-    background-color: #032b68d7;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-}
+    background-color: #
