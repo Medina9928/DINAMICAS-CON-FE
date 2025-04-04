@@ -22,7 +22,6 @@ function updateNumberStates() {
             }
         }
     });
-    // Quité la llamada a displaySoldNumbers porque ya no hay lista
 }
 
 // Cargar números vendidos desde la API (simulación con lista inicial)
@@ -85,19 +84,25 @@ numberButtons.forEach((button) => {
 });
 
 // Botón de pagar
-document.getElementById("payButton").addEventListener("click", async () => {
+document.getElementById("payButton").addEventListener("click", () => {
     if (selectedNumbers.length > 0) {
         const message = `Hola, me interesa participar en la rifa con los números: ${selectedNumbers.join(", ")}.`;
-        if (confirm(`¿Estás seguro de comprar los números: ${selectedNumbers.join(", ")}?`)) {
+        if (window.confirm(`¿Estás seguro de comprar los números: ${selectedNumbers.join(", ")}?`)) {
+            // Abrir WhatsApp inmediatamente
+            sendWhatsAppMessage(message);
+            
+            // Actualizar los números vendidos después de abrir WhatsApp
             selectedNumbers.forEach((number) => {
                 if (!soldNumbers.includes(number)) {
                     soldNumbers.push(number);
                 }
             });
-            await saveSoldNumbers();
-            updateNumberStates();
-            sendWhatsAppMessage(message);
-            selectedNumbers = [];
+            saveSoldNumbers().then(() => {
+                updateNumberStates();
+                selectedNumbers = []; // Limpiar selección
+            }).catch((error) => {
+                console.error("Error al guardar después de WhatsApp:", error);
+            });
         }
     } else {
         alert("Por favor, selecciona al menos un número disponible antes de pagar.");
@@ -130,7 +135,7 @@ adminModeBtn.addEventListener("click", () => {
     } else {
         adminMode = false;
         manualCountInput.style.display = "none";
-        soldCountStatic.textContent = manualCountInput.value;
+        soldCountStatic.textContent = manualCountInput.value || soldNumbers.length;
         adminModeBtn.textContent = "Activar Modo Admin";
         updateNumberStates();
     }
