@@ -1,5 +1,5 @@
 // === SECCIÓN DE NÚMEROS VENDIDOS INICIALES (EDITA AQUÍ) ===
-const initialSoldNumbers = ["01", "03", "05", "91", "10"]; // Cambia estos números manualmente
+const initialSoldNumbers = []; // Cambia estos números manualmente
 // === FIN DE LA SECCIÓN ===
 
 const numberButtons = document.querySelectorAll(".number-button");
