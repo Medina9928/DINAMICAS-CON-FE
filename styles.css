@@ -10,7 +10,7 @@ body {
 /* Encabezado */
 header {
     background-color: #06529e; /* Azul más oscuro */
-    padding: 20px; /* Reducido para un mejor ajuste */
+    padding: 0; /* Quitamos padding para la imagen */
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     width: 100%; /* Asegura que no exceda la pantalla */
@@ -26,9 +26,11 @@ header h1 {
 
 /* Ajuste de la imagen del logo */
 header img {
-    max-width: 200px; /* Tamaño máximo de la imagen en pantallas grandes */
-    height: auto; /* Mantiene la proporción */
-    margin: 10px 0; /* Espaciado superior e inferior */
+    width: 900px; /* Nuevo ancho para portada */
+    height: 250px; /* Nuevo alto para portada */
+    object-fit: cover; /* Ajusta la imagen sin distorsionarla */
+    display: block; /* Elimina espacios no deseados */
+    margin: 0 auto; /* Centra la imagen */
 }
 
 /* Estilo de la imagen del premio */
@@ -134,7 +136,7 @@ header img {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s
+    transition: background-color 0.3s;
 }
 
 .pay-button:hover {
@@ -170,7 +172,9 @@ footer a:hover {
     }
 
     header img {
-        max-width: 150px; /* Tamaño máximo de la imagen en pantallas pequeñas */
+        width: 100%; /* Se adapta al ancho del contenedor */
+        height: auto; /* Mantiene proporción */
+        max-width: 768px; /* Limita el tamaño máximo */
     }
 
     .header-info h2 {
@@ -212,7 +216,9 @@ footer a:hover {
     }
 
     header img {
-        max-width: 120px; /* Tamaño máximo de la imagen en pantallas muy pequeñas */
+        width: 100%; /* Se adapta al ancho del contenedor */
+        height: auto; /* Mantiene proporción */
+        max-width: 480px; /* Limita el tamaño máximo */
     }
 
     .header-info h2 {
